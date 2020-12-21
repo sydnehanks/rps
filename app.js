@@ -1,5 +1,5 @@
-const userScore = 0;
-const computerScore = 0;
+let userScore = 0;
+let computerScore = 0;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_div = document.querySelector(".score-board");
@@ -21,62 +21,75 @@ return "Scissors";
 }
 
 function win(userChoice, computerChoice) {
-  usersScore++;
+  userScore++;
   userScore_span.innerHTML = userScore;
   computerScore_span.innerHTML = computerScore;
-  const samllUserWord = "user".fontsize(3).sup();
-  const samllCompWord = "comp".fontsize(3).sup();
-  reusult_p.innerHTML = `${convertToWord(userChoice)}${samllUserWord} beats ${convertToWord(computerChoice)}${smallCompWord}You Win!`;
+  const smallUserWord = "user".fontsize(3).sub();
+  const smallCompWord = "comp".fontsize(3).sub();
+  reusult_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} beats ${convertToWord(computerChoice)}${smallCompWord}You Win!`;
 }
 
 function lose(userChoice, computerChoice) {
   computerScore++;
   userScore_span.innerHTML = userScore;
   computerScore_span.innerHTML = computerScore;
-  const samllUserWord = "user".fontsize(3).sup();
-  const samllCompWord = "comp".fontsize(3).sup();
-  reusult_p.innerHTML = `${convertToWord(userChoice)}${samllUserWord} loses ${convertToWord(computerChoice)}${smallCompWord}You Lost....!`; 
+  const smallUserWord = "user".fontsize(3).sub();
+  const smallCompWord = "comp".fontsize(3).sub();
+  reusult_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} loses ${convertToWord(computerChoice)}${smallCompWord}You Lost....!`; 
 }
 
 function draw (userChoice, computerChoice) {
-  const samllUserWord = "user".fontsize(3).sup();
-  const samllCompWord = "comp".fontsize(3).sup();
-  reusult_p.innerHTML = `${convertToWord(userChoice)}${samllUserWord} equals ${convertToWord(computerChoice)}${smallCompWord}Draw!`; 
+  const smallUserWord = "user".fontsize(3).sub();
+  const smallCompWord = "comp".fontsize(3).sub();
+  reusult_p.innerHTML = `${convertToWord(userChoice)}${smallUserWord} equals ${convertToWord(computerChoice)}${smallCompWord}Draw!`; 
 }
 
 
-function game (userChoice, computerChoice){
-  
+function game (userChoice, computerChoice)  {
   switch (userChoice + computerChoice) {
     case "rs":
-      case "pr":
-        case "sp":
-          win(userChoice, computerChoice);
-         break;
-          case "rp":
-            case "ps":
-              case "sr":
-              lose(userChoice, computerChoice);
-               break;
-                case "rr":
-                  case "pp":
-                    case "ss":
-                    draw(userChoice, computerChoice);    
-                       break;
+      win(userChoice, computerChoice);
+       break;  
+        case "pr":
+         win(userChoice, computerChoice);
+          break;
+           case "sp":
+            win(userChoice, computerChoice);
+             break;
+              case "rp":
+               lose(userChoice, computerChoice);
+                break;
+                 case "ps":
+                  lose(userChoice, computerChoice);
+                   break;
+                    case "sr":
+                     lose(userChoice, computerChoice);
+                      break;
+                       case "rr":
+                        draw(userChoice, computerChoice);    
+                         break; 
+                          case "pp":
+                           draw(userChoice, computerChoice);    
+                            break;  
+                             case "ss":
+                              draw(userChoice, computerChoice);    
+                               break;
   }
 }
 
 function main() {
+  
   rock_div.addEventListener('click', function() {
-    game("r");
+  
+    game("r", getComputerChoice());
   })
 
   paper_div.addEventListener('click', function() {
-  game("p");
+  game("p" , getComputerChoice());
   })
 
   scissors_div.addEventListener('click', function() {
-  game("s");
+  game("s", getComputerChoice());
 })
 }
 
